@@ -50,7 +50,7 @@ Chip.prototype.getShape = function() {
 };
 
 Chip.prototype.onClick = function() {
-    this.emit(GameEvents.CHIP_CLICKED, {row: this.row, col: this.col, shape: this.shape});
+    this.emit(GameEvents.CHIP_CLICKED, {row: this.row, col: this.col, shape: this.type});
 };
 
 Chip.prototype.select = function() {

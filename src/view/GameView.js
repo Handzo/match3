@@ -126,11 +126,11 @@ GameView.prototype.remove = function(matches) {
 
 GameView.prototype.animate = function(row, col, shift) {
 
-    console.log(shift);
     // slide chip animation
-    var origY = this.chips[row][col].y;
-    this.chips[row][col].y -= shift * (this.cellHeight + this.padding);
-    this.chips[row][col].addTween(new PIXI.Tween({y: origY}, {duration: shift * 300}));
+    var chip = this.chips[row][col];
+    var origY = chip.y;
+    chip.y -= shift * (this.cellHeight + this.padding);
+    chip.addTween(new PIXI.Tween({y: origY}, {duration: shift * 300}));
 };
 
 module.exports = GameView;

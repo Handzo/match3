@@ -86,7 +86,8 @@ GameController.prototype.checkResult = function() {
 
 GameController.prototype.shuffle = function() {
 
-    this.model.shuffle();
+    while (!this.model.checkPossibilities())
+        this.model.shuffle();
 
     var chips = [];
     for (var row = 0; row < this.view.chips.length; ++row)

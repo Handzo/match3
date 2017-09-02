@@ -33,6 +33,9 @@ GameModel.prototype.init = function() {
                    this.getMatchLength(row, col, {x: 0, y: -1}) >= this.matchLength);
         }
     }
+
+    while (!this.checkPossibilities())
+        this.shuffle();
 };
 
 GameModel.prototype.getMatchLength = function(row, col, direction) {

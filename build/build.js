@@ -189,7 +189,8 @@ GameController.prototype.checkResult = function() {
 
 GameController.prototype.shuffle = function() {
 
-    this.model.shuffle();
+    while (!this.model.checkPossibilities())
+        this.model.shuffle();
 
     var chips = [];
     for (var row = 0; row < this.view.chips.length; ++row)
@@ -303,6 +304,9 @@ GameModel.prototype.init = function() {
                    this.getMatchLength(row, col, {x: 0, y: -1}) >= this.matchLength);
         }
     }
+
+    while (!this.checkPossibilities())
+        this.shuffle();
 };
 
 GameModel.prototype.getMatchLength = function(row, col, direction) {
@@ -605,7 +609,7 @@ Chip.prototype.getShape = function() {
 };
 
 Chip.prototype.onClick = function() {
-    this.emit(GameEvents.CHIP_CLICKED, {row: this.row, col: this.col, shape: this.shape});
+    this.emit(GameEvents.CHIP_CLICKED, {row: this.row, col: this.col, shape: this.type});
 };
 
 Chip.prototype.select = function() {
@@ -761,11 +765,11 @@ GameView.prototype.remove = function(matches) {
 
 GameView.prototype.animate = function(row, col, shift) {
 
-    console.log(shift);
     // slide chip animation
-    var origY = this.chips[row][col].y;
-    this.chips[row][col].y -= shift * (this.cellHeight + this.padding);
-    this.chips[row][col].addTween(new PIXI.Tween({y: origY}, {duration: shift * 300}));
+    var chip = this.chips[row][col];
+    var origY = chip.y;
+    chip.y -= shift * (this.cellHeight + this.padding);
+    chip.addTween(new PIXI.Tween({y: origY}, {duration: shift * 300}));
 };
 
 module.exports = GameView;
