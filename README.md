@@ -12,6 +12,7 @@ Match 3 Game
 
 ```
 $> git clone https://github.com/Handzo/match3.git
+$> cd match3
 $> npm install
 $> webpack
 ```
